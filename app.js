@@ -1,4 +1,5 @@
 const models = require('./models');
+const { Op } = require("sequelize");
 
 const consultaPropiedades = async () => {
     r = await models.Propiedad.findAll();
@@ -21,6 +22,19 @@ const agregaPropietarios = async () => {
         
     });
 
+    const proyectos = await 
+        models.Proyecto.findAll(
+            { 
+               where: {
+                    [Op.or]: [
+                         { idProyecto: 'PR3' },
+                         { nombre: 'Proyecto 2' } 
+                    ]
+               }
+            }
+        );
+    console.log("Proyectos encontrados:",proyectos.length)
+    await per1.addDonandoEn(proyectos);
 
 
     models.sequelize.close();
